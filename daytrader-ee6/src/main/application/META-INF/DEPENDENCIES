@@ -1,0 +1,21 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+DayTrader :: Enterprise Application
+
+
+From: 'Apache Software Foundation' (http://www.apache.org/)
+  - DayTrader :: EJBs (http://geronimo.apache.org/maven/genesis/EE6/config/project-config/daytrader/modules/daytrader-ejb) com.ibm.websphere.samples.daytrader:daytrader-ejb:ejb:EE6
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - DayTrader :: Quote Streamer (http://geronimo.apache.org/maven/genesis/EE6/config/project-config/daytrader/modules/daytrader-streamer) com.ibm.websphere.samples.daytrader:daytrader-streamer:jar:EE6
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - DayTrader :: Web Application (http://geronimo.apache.org/maven/genesis/EE6/config/project-config/daytrader/modules/daytrader-web) com.ibm.websphere.samples.daytrader:daytrader-web:war:EE6
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - DayTrader :: WS Application Client (http://geronimo.apache.org/maven/genesis/EE6/config/project-config/daytrader/daytrader-wsappclient) com.ibm.websphere.samples.daytrader:daytrader-wsappclient:jar:EE6
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+
+
