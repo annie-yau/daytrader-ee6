@@ -1,0 +1,18 @@
+pipeline {
+ agent any
+ stages {
+ stage('Build Automation') {
+ steps {
+ sh '''
+ echo "BUILD NUMBER: ${BUILD_NUMBER}"
+ cd dt-ejb
+ mvn clean test
+ cd ../Rest
+ mvn clean test
+ cd ../web
+ mvn clean test
+ '''
+ }
+ }
+ }
+}
