@@ -9,11 +9,11 @@ pipeline {
  export PATH=$PATH:$M2_HOME/bin
  export JAVA_HOME=/opt/jdk1.8.0_171
  cd dt-ejb
- mvn clean test
+ mvn clean test install
  cd ../Rest
- mvn clean test
+ mvn clean test install
  cd ../web
- mvn clean test
+ mvn clean test install
  '''
  }
  }
