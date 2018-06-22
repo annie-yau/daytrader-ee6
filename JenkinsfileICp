@@ -2,8 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'ICP_MASTER_CFC', defaultValue: 'master.cfc:8500')
-        string(name: 'ICP_MASTER_8001', defaultValue: 'https://172.21.20.136:8001')
-        string(name: 'ICP_TOKEN', defaultValue: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tbWNmZm0iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjBjNGEzOWY2LTc2YzEtMTFlNy1hODhjLTAwNTA1NjlhNGJhMiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.Jknkvowh-UF-4mgmi0J5BsrSvpzX8yazAceONtQZ4pb0ZGsOOTcQuClc4KQeszAbBqjOLbj0f9FchphAWfhRU02hLaNqsPRIgBL4HhnJNVUrt5Yox5N2z5EWoDLtVLGP6-Ulkp_7L-wEva2uNd4GI7utbr8wNytO6Fkcym0szmGkKJXJjEuIzH6x4P5dI61uPgbyy3XSEpvgkl1sNGK9LqpFA-GGFg6Lpa6Jt09MDV6XU3eY7ELYx7YzI1QYaNH9GkiinimoU8m9QRuw_NFsQLRGM6w2JIwVRf1Ne1R_7QK6fVIQAw8_k9tNwrSgYCYQEpftH4UebmNx0gmsiu-40A')
+        string(name: 'ICP_MASTER_8001', defaultValue: 'https://10.0.2.15:8001')
+        string(name: 'ICP_TOKEN', defaultValue: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tdGJyeGgiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImUwMDA4ZWM1LTVmZmUtMTFlOC04NjA2LTA4MDAyN2Y3NDNiNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.YSQCw7KPCLKLd5j4fUzCP0esw0NVlv0ff1uDCB7XtnVuqOzRdZ0yZvW5uigwNgS9nnXtOnalxtjxcbPEYtiluP4kEjXxIMKSpwaolJ3rCXgPtCsQrwXOfY1uiVqNF0hOU75UdaSFnqGMCvW0Za57tO-aNt7D8PF0tD6-7rNf3Rq7xr_12koA_FLsmBxLuz4IG7DSSaIBhbU4I_fijmClSpGgeOypqE18bDQUAU7nsxPQFMR6_3IwnBizUNwzlMWZTom27MgVEAyuHxabOP0qC0wTHkVmKvXJ9CP_mt99')
     }
     stages {
         stage('Continuous Integration') {
@@ -20,6 +20,7 @@ pipeline {
                    cd ..
                    '''
              }
+             
         }
         stage('Continuous Delivery') {
             steps {
