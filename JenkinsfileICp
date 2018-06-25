@@ -19,7 +19,7 @@ pipeline {
                    cd ../web
                    mvn clean install
                    cd ../daytrader-ee6
-                   mvn clean verify –Pci-docker
+                   mvn clean verify –Pdocker
                    cd ..
                    '''
              }
