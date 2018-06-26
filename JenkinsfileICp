@@ -25,7 +25,7 @@ pipeline {
              }
              
         }
-        stage('Continuous Delivery') {
+        stage('Continuous Delivery') { --
             steps {
                 sh '''                    
                     echo "docker login to master.cfc"
@@ -35,8 +35,7 @@ pipeline {
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/default/daytrader-ee6
                     echo "kubectl login"
-                    export PATH=$PATH:/usr/local/bin/kubectl
-                    echo $PATH
+                    export PATH=$PATH:/usr/local/bin
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
                     kubectl config set-credentials user --token=$ICP_TOKEN
