@@ -24,7 +24,7 @@ pipeline {
                    '''
              }             
         }
-        stage('Continuous Delivery') { --
+        stage('Continuous Delivery') {
             steps {
                 sh '''     
                     export PATH=$PATH:/usr/local/bin
