@@ -28,6 +28,7 @@ pipeline {
         stage('Continuous Delivery') {
             steps {
                 sh '''
+                    export PATH=$PATH:/usr/local/bin/kubectl
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
