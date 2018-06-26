@@ -10,7 +10,7 @@ pipeline {
             steps {
                 sh '''
                     export M2_HOME=/usr/local/src/apache-maven
-                    export PATH=$PATH:$M2_HOME/bin:/usr/local/bin/kubectl
+                    export PATH=$PATH:$M2_HOME/bin
                     export JAVA_HOME=/opt/jdk1.8.0_171
                    cd dt-ejb
                    mvn clean install
@@ -22,20 +22,19 @@ pipeline {
                    mvn clean verify -Pci-docker
                    cd ..
                    '''
-             }
-             
+             }             
         }
         stage('Continuous Delivery') { --
             steps {
-                sh '''                    
+                sh '''     
+                    export PATH=$PATH:/usr/local/bin
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
                     docker tag dhvines/daytrader-ee6:1.0-SNAPSHOT $ICP_MASTER_CFC/default/daytrader-ee6
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/default/daytrader-ee6
-                    echo "kubectl login"
-                    export PATH=$PATH:/usr/local/bin
+                    echo "kubectl login"                    
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
                     kubectl config set-credentials user --token=$ICP_TOKEN
