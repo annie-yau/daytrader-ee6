@@ -1,0 +1,12 @@
+<server>
+    <featureManager>
+        <feature>localConnector-1.0</feature>
+        <feature>jaxrs-1.1</feature>
+        <feature>jndi-1.0</feature>
+    </featureManager>
+
+	<httpEndpoint host="*" httpPort="9080" id="defaultHttpEndpoint"/>
+		
+	<executor coreThreads="40" id="default" keepAlive="60s" maxThreads="50" name="LargeThreadPool" rejectedWorkPolicy="CALLER_RUNS" stealPolicy="LOCAL"/>
+
+</server>
