@@ -11,7 +11,8 @@ pipeline {
                 sh '''
                     export M2_HOME=/usr/local/src/apache-maven
                     export PATH=$PATH:$M2_HOME/bin
-                    export JAVA_HOME=/opt/jdk1.8.0_171                 
+                    export JAVA_HOME=/opt/jdk1.8.0_171
+                    cd marketsMicroService
                     mvn clean install
                     '''
              }             
