@@ -11,17 +11,9 @@ pipeline {
                 sh '''
                     export M2_HOME=/usr/local/src/apache-maven
                     export PATH=$PATH:$M2_HOME/bin
-                    export JAVA_HOME=/opt/jdk1.8.0_171
-                   cd dt-ejb
-                   mvn clean install
-                   cd ../Rest
-                   mvn clean install
-                   cd ../web
-                   mvn clean install
-                   cd ../daytrader-ee6
-                   mvn clean verify -Pci-docker
-                   cd ..
-                   '''
+                    export JAVA_HOME=/opt/jdk1.8.0_171                 
+                    mvn clean install
+                    '''
              }             
         }
         stage('Continuous Delivery') {
@@ -41,14 +33,14 @@ pipeline {
                     kubectl config set-context cfc --user=user --namespace=default
                     kubectl config use-context cfc
                     #!/bin/bash
-                    echo "checking if wlp-daytrader-jenkins already exists"
-                    if kubectl describe service wlp-daytrader-jenkins; then
+                    echo "checking if wlp-markets-jenkins already exists"
+                    if kubectl describe service wlp-markets-jenkins; then
                         echo "Service already exists, delete first"
-                        kubectl delete service wlp-daytrader-jenkins
+                        kubectl delete service wlp-markets-jenkins
                     fi
-                    if kubectl describe deployment wlp-daytrader-jenkins; then
+                    if kubectl describe deployment wlp-markets-jenkins; then
                         echo "Application already exists, delete first"
-                        kubectl delete deployment wlp-daytrader-jenkins
+                        kubectl delete deployment wlp-markets-jenkins
                     fi
                     echo "Create application"
                     kubectl create -f app.json
