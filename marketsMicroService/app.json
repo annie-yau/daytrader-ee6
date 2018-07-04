@@ -2,10 +2,10 @@
   "apiVersion": "extensions/v1beta1",
   "kind": "Deployment",
   "metadata": {
-    "name": "wlp-daytrader-jenkins",
+    "name": "wlp-markets-jenkins",
     "namespace": "default",
     "labels": {
-      "app": "wlp-daytrader-jenkins"
+      "app": "wlp-markets-jenkins"
     },
     "annotations": {
       "deployment.kubernetes.io/revision": "1",
@@ -16,20 +16,20 @@
     "replicas": 1,
     "selector": {
       "matchLabels": {
-        "app": "wlp-daytrader-jenkins"
+        "app": "wlp-markets-jenkins"
       }
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "wlp-daytrader-jenkins"
+          "app": "wlp-markets-jenkins"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "wlp-daytrader-jenkins",
-            "image": "master.cfc:8500/default/daytrader-ee6",
+            "name": "wlp-markets-jenkins",
+            "image": "master.cfc:8500/default/wlp-markets",
              "ports": [
               {
                 "containerPort": 80,
@@ -38,8 +38,8 @@
             ],
          "env": [
               {
-                "name": "DAYTRADER3_CONTEXT_ROOT_URL",
-                "value": "http://localhost:9080/daytrader"
+                "name": "MARKETS_CONTEXT_ROOT_URL",
+                "value": "http://localhost:9086/markets"
               }
             ],
             "resources": {},
