@@ -2,11 +2,11 @@
   "kind": "Service",
   "apiVersion": "v1",
   "metadata": {
-    "name": "wlp-daytrader-jenkins",
+    "name": "wlp-markets-jenkins",
     "namespace": "default",
-    "selfLink": "/api/v1/namespaces/default/services/wlp-daytrader-jenkins",
+    "selfLink": "/api/v1/namespaces/default/services/wlp-markets-jenkins",
     "labels": {
-      "app": "wlp-daytrader-jenkins"
+      "app": "wlp-markets-jenkins"
     }
   },
   "spec": {
@@ -15,12 +15,12 @@
         "name": "http",
         "protocol": "TCP",
         "port": 80,
-        "targetPort": 9080,
+        "targetPort": 9086,
         "nodePort": 31420
       }
     ],
     "selector": {
-      "app": "wlp-daytrader-jenkins"
+      "app": "wlp-markets-jenkins"
     },
     "type": "NodePort",
     "sessionAffinity": "None"
