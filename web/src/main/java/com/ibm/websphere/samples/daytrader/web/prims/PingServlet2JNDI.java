@@ -68,6 +68,8 @@ public class PingServlet2JNDI extends HttpServlet
 		try
 			{
 
+			
+			//DVP This is not something the front end should be doing...
 			int iter = TradeConfig.getPrimIterations();
 			for (int ii = 0; ii < iter; ii++) {
 				InitialContext context = new InitialContext();

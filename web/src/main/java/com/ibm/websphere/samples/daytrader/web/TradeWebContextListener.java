@@ -16,11 +16,15 @@
  */
 package com.ibm.websphere.samples.daytrader.web;
 
-import javax.servlet.*;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.ibm.websphere.samples.daytrader.direct.*;
-import com.ibm.websphere.samples.daytrader.util.*;
+import com.ibm.websphere.samples.daytrader.util.Log;
+
+
+// DHV
+// import com.ibm.websphere.samples.daytrader.direct.*;
 
 @WebListener()
 public class TradeWebContextListener
@@ -31,7 +35,8 @@ public class TradeWebContextListener
 	public void contextInitialized(ServletContextEvent event)
 	{
 		Log.trace("TradeWebContextListener contextInitialized -- initializing TradeDirect");
-		TradeDirect.init();		
+// DHV
+//      TradeDirect.init();		
 	}
 	public void contextDestroyed(ServletContextEvent event)
 	{

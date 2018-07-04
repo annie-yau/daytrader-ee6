@@ -22,7 +22,8 @@ import javax.servlet.http.*;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.ibm.websphere.samples.daytrader.direct.*;
+// DHV
+//import com.ibm.websphere.samples.daytrader.direct.*;
 import com.ibm.websphere.samples.daytrader.util.*;
 
 /**
@@ -66,8 +67,11 @@ public class PingServlet2DB extends HttpServlet
 		try
 			{
 			//TradeJDBC uses prepared statements so I am going to make use of it's code.
-			TradeDirect trade = new TradeDirect();
-			trade.getConnPublic();
+// DHV
+			
+			//DVP this method should not be called from the front end...We will not migrate this
+			//TradeDirect trade = new TradeDirect();
+			//trade.getConnPublic();
 
 			output.append(
 				"<html><head><title>PingServlet2DB.</title></head>"

@@ -117,6 +117,7 @@ This may disable custom JSF extensions, such as factories defined in the project
         <location>/error.jsp</location>
     </error-page>
     
+<!--
   <resource-ref>
         <res-ref-name>jdbc/TradeDataSource</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
@@ -160,5 +161,6 @@ This may disable custom JSF extensions, such as factories defined in the project
         <message-destination-usage>Produces</message-destination-usage>
         <message-destination-link>dt-ejb.jar#TradeStreamerTopic</message-destination-link>
     </message-destination-ref>
+-->
 
 </web-app>

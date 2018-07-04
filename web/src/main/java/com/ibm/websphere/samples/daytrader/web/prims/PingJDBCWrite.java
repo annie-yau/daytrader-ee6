@@ -18,14 +18,14 @@ package com.ibm.websphere.samples.daytrader.web.prims;
 
 import java.io.*;
 import java.math.BigDecimal;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
-
 import javax.servlet.annotation.WebServlet;
 
-
 import com.ibm.websphere.samples.daytrader.*;
-import com.ibm.websphere.samples.daytrader.direct.*;
+// DHV
+// import com.ibm.websphere.samples.daytrader.direct.*;
 import com.ibm.websphere.samples.daytrader.util.*;
 /**
  * 
@@ -64,12 +64,15 @@ public void doGet(HttpServletRequest req, HttpServletResponse res)
 		newPrice = TradeConfig.getRandomPriceChangeFactor();
 
 		//TradeJDBC makes use of prepared statements so I am going to reuse the existing code.
-		TradeDirect trade = new TradeDirect(); 
+// DHV
+//		TradeDirect trade = new TradeDirect(); 
+		TradeDirectAction trade = new TradeDirectAction();
 
 		//update the price of our symbol
 		QuoteDataBean quoteData = null;
 		int iter = TradeConfig.getPrimIterations();
 		for (int ii = 0; ii < iter; ii++) {
+// DHV
 			quoteData = trade.updateQuotePriceVolumeInt(symbol, newPrice, 100.0, false);
 		}
 

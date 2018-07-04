@@ -302,22 +302,22 @@ public class TradeServletAction {
                                     + "illegal argument, information should be in exception string"
                                     + "treating this as a user error and forwarding on to a new page",
                             e);
-        } catch (javax.ejb.FinderException e) {
-            // this is a user error so I will
-            // forward them to another page rather than throw a 500
-            req.setAttribute("results", results
-                    + "\nCould not find account for + " + userID);
-            // requestDispatch(ctx, req, resp,
-            // TradeConfig.getPage(TradeConfig.HOME_PAGE));
-            // log the exception with an error level of 3 which means, handled
-            // exception but would invalidate a automation run
-            Log
-                    .error(
-                            "TradeServletAction.doHome(...)"
-                                    + "Error finding account for user "
-                                    + userID
-                                    + "treating this as a user error and forwarding on to a new page",
-                            e);
+//DHV        } catch (javax.ejb.FinderException e) {
+//            // this is a user error so I will
+//            // forward them to another page rather than throw a 500
+//            req.setAttribute("results", results
+//                    + "\nCould not find account for + " + userID);
+//            // requestDispatch(ctx, req, resp,
+//            // TradeConfig.getPage(TradeConfig.HOME_PAGE));
+//            // log the exception with an error level of 3 which means, handled
+//            // exception but would invalidate a automation run
+//            Log
+//                    .error(
+//                            "TradeServletAction.doHome(...)"
+//                                    + "Error finding account for user "
+//                                    + userID
+//                                    + "treating this as a user error and forwarding on to a new page",
+//                            e);
         } catch (Exception e) {
             // log the exception with error page
             throw new ServletException("TradeServletAction.doHome(...)"

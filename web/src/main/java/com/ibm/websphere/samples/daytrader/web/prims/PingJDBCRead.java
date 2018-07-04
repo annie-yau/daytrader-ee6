@@ -24,7 +24,8 @@ import javax.servlet.annotation.WebServlet;
 
 
 import com.ibm.websphere.samples.daytrader.*;
-import com.ibm.websphere.samples.daytrader.direct.*;
+// DHV
+//import com.ibm.websphere.samples.daytrader.direct.*;
 import com.ibm.websphere.samples.daytrader.util.*;
 
 /**
@@ -42,6 +43,8 @@ public class PingJDBCRead extends HttpServlet
 	private static final long serialVersionUID = -8810390150632488526L;
 	private static String initTime;
 	private static int hitCount;
+	
+	TradeAction tradeAction = new TradeAction();
 
 	/**
 	 * forwards post requests to the doGet method
@@ -70,12 +73,15 @@ public class PingJDBCRead extends HttpServlet
 		try
 			{
 			//TradeJDBC uses prepared statements so I am going to make use of it's code.
-			TradeDirect trade = new TradeDirect();
+// DHV
+//			TradeDirect trade = new TradeDirect();
+			TradeAction trade = new TradeAction();
 			symbol = TradeConfig.rndSymbol();
 			
 			QuoteDataBean quoteData = null;
 			int iter = TradeConfig.getPrimIterations();
 			for (int ii = 0; ii < iter; ii++) {
+// DHV
 				quoteData = trade.getQuote(symbol);
 			}
 

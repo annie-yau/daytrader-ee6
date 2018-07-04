@@ -28,7 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ibm.websphere.samples.daytrader.RunStatsDataBean;
 import com.ibm.websphere.samples.daytrader.TradeAction;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
-import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
+// DHV
+// import com.ibm.websphere.samples.daytrader.direct.TradeDirect;
 import com.ibm.websphere.samples.daytrader.util.Log;
 
 /**
@@ -321,7 +322,7 @@ public class TradeConfigServlet extends HttpServlet {
 
         String action = null;
         String result = "";
-
+        TradeAction tradeAction = new TradeAction();     
         resp.setContentType("text/html");
         try
         {
@@ -343,65 +344,11 @@ public class TradeConfigServlet extends HttpServlet {
             }
             else if (action.equals("buildDB"))
             {
-                resp.setContentType("text/html");
-                new TradeBuildDB(resp.getWriter(), null);
-                result = "DayTrader Database Built - " + TradeConfig.getMAX_USERS() + "users created";
+                 tradeAction.buildDB();
             }
             else if (action.equals("buildDBTables"))
             {
-
-                resp.setContentType("text/html");
-
-                //Find out the Database being used
-                TradeDirect tradeDirect = new TradeDirect();
-
-                String dbProductName = null;
-                try
-                {
-                    dbProductName = tradeDirect.checkDBProductName();
-                } catch (Exception e)
-                {
-                    Log.error(e, "TradeBuildDB: Unable to check DB Product name");
-                }
-                if (dbProductName == null)
-                {
-                    resp.getWriter().println("<BR>TradeBuildDB: **** Unable to check DB Product name, please check Database/AppServer configuration and retry ****</BR></BODY>");
-                    return;
-                }
-
-                String ddlFile = null;
-                //Locate DDL file for the specified database
-                try
-                {
-                    resp.getWriter().println("<BR>TradeBuildDB: **** Database Product detected: " + dbProductName + " ****</BR>");
-                    if (dbProductName.startsWith("DB2/")) // if db is DB2
-                    {
-                        ddlFile = "/dbscripts/db2/Table.ddl";
-                    }
-                    else if (dbProductName.startsWith("Apache Derby")) //if db is Derby
-                    {
-                        ddlFile = "/dbscripts/derby/Table.ddl";
-                    }
-                    else if (dbProductName.startsWith("Oracle")) // if the Db is Oracle
-                    {
-                        ddlFile = "/dbscripts/oracle/Table.ddl";
-                    }
-                    else // Unsupported "Other" Database
-                    {
-                        ddlFile = "/dbscripts/other/Table.ddl";
-                        resp.getWriter().println("<BR>TradeBuildDB: **** This Database is unsupported/untested use at your own risk ****</BR>");
-                    }
-
-                    resp.getWriter().println("<BR>TradeBuildDB: **** The DDL file at path <I>" + ddlFile + "</I> will be used ****</BR>");
-                    resp.getWriter().flush();
-                } catch (Exception e)
-                {
-                    Log.error(e, "TradeBuildDB: Unable to locate DDL file for the specified database");
-                    resp.getWriter().println("<BR>TradeBuildDB: **** Unable to locate DDL file for the specified database ****</BR></BODY>");
-                    return;
-                }
-                new TradeBuildDB(resp.getWriter(), getServletContext().getResourceAsStream(ddlFile));
-
+                tradeAction.recreateDBTables();
             }
             doConfigDisplay(req, resp, result + "Current DayTrader Configuration:");
         } catch (Exception e)
