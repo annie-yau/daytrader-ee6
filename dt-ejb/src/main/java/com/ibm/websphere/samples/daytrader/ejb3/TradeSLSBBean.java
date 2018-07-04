@@ -52,8 +52,8 @@ import com.ibm.websphere.samples.daytrader.MarketSummaryDataBean;
 import com.ibm.websphere.samples.daytrader.OrderDataBean;
 import com.ibm.websphere.samples.daytrader.QuoteDataBean;
 import com.ibm.websphere.samples.daytrader.RunStatsDataBean;
-import com.ibm.websphere.samples.daytrader.TradeAction;
 import com.ibm.websphere.samples.daytrader.TradeConfig;
+import com.ibm.websphere.samples.daytrader.impl.TradeAction;
 import com.ibm.websphere.samples.daytrader.util.FinancialUtils;
 import com.ibm.websphere.samples.daytrader.util.Log;
 

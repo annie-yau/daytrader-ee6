@@ -19,6 +19,8 @@ package com.ibm.websphere.samples.daytrader;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 
+import com.ibm.websphere.samples.daytrader.impl.TradeAction;
+
 /**
  *
  * This is a TradeAction wrapper to handle web service handling

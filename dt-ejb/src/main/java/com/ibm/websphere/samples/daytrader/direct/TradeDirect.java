@@ -26,6 +26,7 @@ import javax.jms.*;
 import javax.sql.DataSource;
 
 import com.ibm.websphere.samples.daytrader.*;
+import com.ibm.websphere.samples.daytrader.impl.TradeAction;
 import com.ibm.websphere.samples.daytrader.util.*;
 
 import java.sql.Connection;
@@ -749,7 +750,7 @@ public class TradeDirect implements TradeServices
 			stmt.close();
 			commit(conn);
 		} catch (Exception e) {
-			Log.error("TradeDirect:getOrders -- error getting user orders", e);
+			Log.error("TradeDirect:getClosedOrders -- error getting user orders", e);
 			rollBack(conn, e);
 		} finally {
 			releaseConn(conn);
@@ -880,19 +881,21 @@ public class TradeDirect implements TradeServices
 
 			ResultSet rs = stmt.executeQuery();
 
-			while (!rs.next()) {
-				quoteData = getQuoteDataFromResultSet(rs);
-				quotes.add(quoteData);
-			}
+			//DHV - found a fixed a defect
+	    	//while (!rs.next()) {
+	    	while (rs.next()) {
+   				quoteData = getQuoteDataFromResultSet(rs);
+    			quotes.add(quoteData);	    			
+		    }
 
 			stmt.close();
 		} catch (Exception e) {
 			Log.error("TradeDirect:getAllQuotes", e);
 			rollBack(conn, e);
-		} finally {
+		}
+		finally {
 			releaseConn(conn);
 		}
-
 		return quotes;
 	}
 
@@ -1669,8 +1672,8 @@ public class TradeDirect implements TradeServices
 
 	private QuoteDataBean getQuoteDataFromResultSet(ResultSet rs)
 			throws Exception {
+		
 		QuoteDataBean quoteData = null;
-
 		quoteData = new QuoteDataBean(rs.getString("symbol"), rs
 				.getString("companyName"), rs.getDouble("volume"), rs
 				.getBigDecimal("price"), rs.getBigDecimal("open1"), rs
@@ -1692,6 +1695,7 @@ public class TradeDirect implements TradeServices
 		return orderData;
 	}
 
+	//Moved to settings microservice
 	public String checkDBProductName() throws Exception {
 		Connection conn = null;
 		String dbProductName = null;
@@ -1714,6 +1718,7 @@ public class TradeDirect implements TradeServices
 		return dbProductName;
 	}
 
+	
 	public boolean recreateDBTables(Object[] sqlBuffer, java.io.PrintWriter out)
 			throws Exception {
 		// Clear MDB Statistics
@@ -1994,7 +1999,7 @@ public class TradeDirect implements TradeServices
 					Log
 							.trace("TradeDirect:releaseConn -- connection closed, connCount="
 									+ connCount);
-				}
+				} 
 			}
 		} catch (Exception e) {
 			Log
@@ -2307,5 +2312,7 @@ public class TradeDirect implements TradeServices
 	private void setInGlobalTxn(boolean inGlobalTxn) {
 		this.inGlobalTxn = inGlobalTxn;
 	}
+
+
 
 }
