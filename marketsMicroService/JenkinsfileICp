@@ -12,9 +12,9 @@ pipeline {
                     export M2_HOME=/usr/local/src/apache-maven
                     export PATH=$PATH:$M2_HOME/bin
                     export JAVA_HOME=/opt/jdk1.8.0_171
-                    cd rest-client
+                    cd dt-ejb-client
                     mvn clean install
-                    cd ../dt-ejb-client
+                    cd ../rest-client
                     mvn clean install
                     cd ../marketsMicroService
                     mvn clean install
