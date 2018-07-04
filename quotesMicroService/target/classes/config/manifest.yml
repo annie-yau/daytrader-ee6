@@ -1,0 +1,10 @@
+applications:
+- name: rest
+  memory: 512M
+  disk_quota: 1024M
+  instances: 1
+  host: <unique_sub_domain>
+  domain: mybluemix.net
+  env: 
+    REST_CONTEXT_ROOT_URL: "https://<unique_sub_domain>.mybluemix.net/rest"
+    
