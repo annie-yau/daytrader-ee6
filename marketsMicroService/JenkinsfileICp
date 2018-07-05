@@ -48,10 +48,10 @@ pipeline {
                         kubectl delete deployment wlp-markets-jenkins
                     fi
                     echo "Create application"
-                    kubectl create -f app.json
+                    kubectl create -f ./marketsMicroService/app.json
                     echo "Create service"
                     set +e
-                    kubectl create -f service.json                                      
+                    kubectl create -f ./marketsMicroService/service.json                                      
                     echo "finished"
                 '''
             }
