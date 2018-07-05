@@ -28,7 +28,7 @@ pipeline {
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
-                    docker tag dhvines/marketsMicroService:1.0-SNAPSHOT $ICP_MASTER_CFC/default/wlp-markets
+                    docker tag dhvines/wlp-markets:1.0-SNAPSHOT $ICP_MASTER_CFC/default/wlp-markets
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/default/wlp-markets
                     echo "kubectl login"                    
