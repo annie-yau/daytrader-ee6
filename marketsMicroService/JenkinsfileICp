@@ -28,9 +28,9 @@ pipeline {
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
-                    docker tag dhvines/daytrader-ee6:1.0-SNAPSHOT $ICP_MASTER_CFC/default/daytrader-ee6
+                    docker tag dhvines/marketsMicroService:1.0-SNAPSHOT $ICP_MASTER_CFC/default/wlp-markets
                     echo "docker push"
-                    docker push $ICP_MASTER_CFC/default/daytrader-ee6
+                    docker push $ICP_MASTER_CFC/default/wlp-markets
                     echo "kubectl login"                    
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
