@@ -25,6 +25,7 @@ pipeline {
             steps {
                 sh '''     
                     export PATH=$PATH:/usr/local/bin
+                    export markets_app_route=http://10.0.2.15/
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
