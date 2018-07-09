@@ -245,6 +245,7 @@ public class TradeAction implements TradeServices {
         	client.property(ClientProperties.CONNECT_TIMEOUT, connTimeOut);
         String encodedUrl = url;
         try {
+		System.out.println(url);
         	encodedUrl = URLEncoder.encode(url);
         } catch (Exception e){
         	//
