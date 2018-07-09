@@ -1,1 +1,1 @@
--Drest.app.route=http://localhost:9090
+-Drest.app.route=http://10.0.2.15:9080
