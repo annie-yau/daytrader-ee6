@@ -39,7 +39,7 @@
          "env": [
               {
                 "name": "REST_CONTEXT_ROOT_URL",
-                "value": "http://10.0.2.15:9086/marketsMicroService"
+                "value": "http://10.0.2.15:9080/markets"
               }
             ],
             "resources": {},
