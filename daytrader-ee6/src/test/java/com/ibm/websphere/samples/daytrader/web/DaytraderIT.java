@@ -30,6 +30,9 @@ public class DaytraderIT {
  
     private Response sendRequest(String url, String requestType) {
         Client client = ClientBuilder.newClient();
+        
+        System.out.println("in sendRequest: url = " + url);
+        
         WebTarget target = client.target(url);
         Invocation.Builder invoBuild = target.request();
         Response response = invoBuild.build(requestType).invoke();
