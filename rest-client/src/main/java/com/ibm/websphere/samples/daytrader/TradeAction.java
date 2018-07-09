@@ -255,6 +255,7 @@ public class TradeAction implements TradeServices {
         
         WebTarget target = client.target(encodedUrl);
 
+	    System.out.println("After call client.target");
 
         Response response = null;
         
@@ -262,7 +263,9 @@ public class TradeAction implements TradeServices {
             Entity<?> empty = Entity.text("");
             response = target.request().put(empty);
         } else if (method.equals("GET")) {
-            response = target.request().get();        	
+	   
+            response = target.request().get();     
+		System.out.println("After call target.request().get()");
         } else if (method.equals("DELETE")) {
             response = target.request().delete();        	
         } else if (method.equals("POST")) {
