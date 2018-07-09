@@ -3,8 +3,8 @@ applications:
   memory: 512M
   disk_quota: 1024M
   instances: 1
-  host: <unique_sub_domain>
+  host: 10.0.2.15
   domain: mybluemix.net
   env: 
-    DAYTRADER3_CONTEXT_ROOT_URL: "https://<unique_sub_domain>.mybluemix.net/daytrader"
+    DAYTRADER3_CONTEXT_ROOT_URL: "https://10.0.2.15.mybluemix.net/daytrader"
     
