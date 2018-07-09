@@ -1,10 +1,10 @@
 applications:
-- name: rest
+- name: marketsMicroService
   memory: 512M
   disk_quota: 1024M
   instances: 1
   host: 10.0.2.15
   domain: mybluemix.net
   env: 
-    REST_CONTEXT_ROOT_URL: "https://10.0.2.15.mybluemix.net/rest"
+    REST_CONTEXT_ROOT_URL: "https://10.0.2.15.mybluemix.net/markets"
     
