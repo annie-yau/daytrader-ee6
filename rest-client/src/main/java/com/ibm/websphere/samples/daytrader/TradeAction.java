@@ -253,7 +253,8 @@ public class TradeAction implements TradeServices {
         }
         System.out.println("Encode url = " + encodedUrl + " : " + method);
         
-        WebTarget target = client.target(encodedUrl);
+       // WebTarget target = client.target(encodedUrl);
+	    WebTarget target = client.target(url);
 
 	    System.out.println("After call client.target");
 
