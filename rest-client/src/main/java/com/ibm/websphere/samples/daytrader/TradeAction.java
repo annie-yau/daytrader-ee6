@@ -245,12 +245,13 @@ public class TradeAction implements TradeServices {
         	client.property(ClientProperties.CONNECT_TIMEOUT, connTimeOut);
         String encodedUrl = url;
         try {
-		System.out.println(url);
+		System.out.println("Input url = " + url);
         	encodedUrl = URLEncoder.encode(url);
         } catch (Exception e){
         	//
+		System.out.println("exception!");
         }
-        System.out.println(encodedUrl + " : " + method);
+        System.out.println("Encode url = " + encodedUrl + " : " + method);
         
         WebTarget target = client.target(encodedUrl);
 
