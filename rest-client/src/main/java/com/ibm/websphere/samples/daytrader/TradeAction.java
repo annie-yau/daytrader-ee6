@@ -270,6 +270,8 @@ public class TradeAction implements TradeServices {
             response = target.request().post(empty);     	
         }
         
+	System.out.println("response = " + response);
+	    
         return response;
     }
 
