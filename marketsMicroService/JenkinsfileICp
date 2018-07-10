@@ -18,7 +18,7 @@ pipeline {
                     cd ../rest-client
                     mvn clean install
                     cd ../marketsMicroService
-                    mvn clean verify -Pci-docker
+                    mvn clean install -Pci-docker
                     '''
              }             
         }
