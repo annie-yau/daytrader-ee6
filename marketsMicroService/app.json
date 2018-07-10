@@ -29,7 +29,7 @@
         "containers": [
           {
             "name": "markets-microservice-jenkins",
-            "image": "mycluster.icp:8500/default/markets-microservice",
+            "image": "mycluster.icp:8500/default/markets",
              "ports": [
               {
                 "containerPort": 80,
@@ -39,7 +39,7 @@
          "env": [
               {
                 "name": "MARKETS_CONTEXT_ROOT_URL",
-                "value": "http://10.0.2.15:9080/markets-microservice/markets"
+                "value": "http://10.0.2.15:9086/markets"
               }
             ],
             "resources": {},
