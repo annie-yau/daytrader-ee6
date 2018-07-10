@@ -15,8 +15,8 @@
         "name": "http",
         "protocol": "TCP",
         "port": 80,
-        "targetPort": 9080,
-        "nodePort": 31420
+        "targetPort": 9086,
+        "nodePort": 31422
       }
     ],
     "selector": {
