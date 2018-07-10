@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ibm.websphere.samples.daytrader</groupId>
-    <artifactId>wlp-markets</artifactId>
+    <artifactId>markets-microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>marketsMicroService</name>
+    <name>markets-microservice</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -298,7 +298,7 @@
         		
         		  <properties>
         		     	<wlpServerName>Rest3Sample</wlpServerName>
-						<restAppRoute>http://10.0.2.15:9090</restAppRoute>
+						<MarketsAppRoute>http://10.0.2.15:9080/markets-microservice</MarketsAppRoute>
 					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 			
@@ -423,7 +423,7 @@
       <goals> <goal>integration-test</goal> </goals>
       <configuration>
         <systemPropertyVariables>					
-          <rest.app.route>${restAppRoute}</rest.app.route>
+          <markets.app.route>${MarketsAppRoute}</markets.app.route>
         </systemPropertyVariables>
         <testSourceDirectory>src/test/java</testSourceDirectory>
       </configuration>
@@ -472,7 +472,7 @@
             <name>dhvines/${project.artifactId}:${project.version}</name>
             <alias>${project.artifactId}</alias>
             <run>
-              <ports> <port>9090:9090</port> </ports>                         
+              <ports> <port>9080:9080</port> </ports>                         
               <wait>
                 <log>
                   (?s)The server defaultServer is ready to run a smarter planet.
