@@ -6,5 +6,5 @@ applications:
   host: 10.0.2.15
   domain: mybluemix.net
   env: 
-    MARKETS_CONTEXT_ROOT_URL: "https://10.0.2.15.mybluemix.net/markets-microservice/markets"
+    MARKETS_CONTEXT_ROOT_URL: "https://10.0.2.15.mybluemix.net/markets"
     
