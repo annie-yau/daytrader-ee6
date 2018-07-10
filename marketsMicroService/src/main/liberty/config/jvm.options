@@ -1,1 +1,1 @@
--Dmarkets.app.route=http://10.0.2.15:9080/markets-microservice
+-Dmarkets.app.route=http://10.0.2.15:9086/markets
