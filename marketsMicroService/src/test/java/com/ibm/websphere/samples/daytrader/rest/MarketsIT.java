@@ -12,8 +12,8 @@ public class MarketsIT {
 
    @Test
    public void testGetMarketSummary() throws Exception {
-	   MarketSummaryDataBean marketSummary = tAction.getMarketSummary();
-	   System.out.println("getMarketSummary() " + marketSummary.toString());
+	   //MarketSummaryDataBean marketSummary = tAction.getMarketSummary();
+	   //System.out.println("getMarketSummary() " + marketSummary.toString());
    }
     
   
