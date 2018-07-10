@@ -2,11 +2,11 @@
   "kind": "Service",
   "apiVersion": "v1",
   "metadata": {
-    "name": "wlp-markets-jenkins",
+    "name": "markets-microservice-jenkins",
     "namespace": "default",
-    "selfLink": "/api/v1/namespaces/default/services/wlp-markets-jenkins",
+    "selfLink": "/api/v1/namespaces/default/services/markets-microservice-jenkins",
     "labels": {
-      "app": "wlp-markets-jenkins"
+      "app": "markets-microservice-jenkins"
     }
   },
   "spec": {
@@ -20,7 +20,7 @@
       }
     ],
     "selector": {
-      "app": "wlp-markets-jenkins"
+      "app": "markets-microservice-jenkins"
     },
     "type": "NodePort",
     "sessionAffinity": "None"
