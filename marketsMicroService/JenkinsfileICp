@@ -29,9 +29,9 @@ pipeline {
                     echo "docker login to master.cfc"
                     docker login -u admin -p admin $ICP_MASTER_CFC
                     echo "docker tag"
-                    docker tag dhvines/wlp-markets:1.0-SNAPSHOT $ICP_MASTER_CFC/default/wlp-markets
+                    docker tag dhvines/markets-microservice:1.0-SNAPSHOT $ICP_MASTER_CFC/default/markets-microservice
                     echo "docker push"
-                    docker push $ICP_MASTER_CFC/default/wlp-markets
+                    docker push $ICP_MASTER_CFC/default/markets-microservice
                     echo "kubectl login"                    
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
@@ -39,14 +39,14 @@ pipeline {
                     kubectl config set-context cfc --user=user --namespace=default
                     kubectl config use-context cfc
                     #!/bin/bash
-                    echo "checking if wlp-markets-jenkins already exists"
-                    if kubectl describe service wlp-markets-jenkins; then
+                    echo "checking if markets-microservice-jenkins already exists"
+                    if kubectl describe service markets-microservice-jenkins; then
                         echo "Service already exists, delete first"
-                        kubectl delete service wlp-markets-jenkins
+                        kubectl delete service markets-microservice-jenkins
                     fi
-                    if kubectl describe deployment wlp-markets-jenkins; then
+                    if kubectl describe deployment markets-microservice-jenkins; then
                         echo "Application already exists, delete first"
-                        kubectl delete deployment wlp-markets-jenkins
+                        kubectl delete deployment markets-microservice-jenkins
                     fi
                     echo "Create application"
                     kubectl create -f ./marketsMicroService/app.json
