@@ -2,10 +2,10 @@
   "apiVersion": "extensions/v1beta1",
   "kind": "Deployment",
   "metadata": {
-    "name": "wlp-markets-jenkins",
+    "name": "markets-microservice-jenkins",
     "namespace": "default",
     "labels": {
-      "app": "wlp-markets-jenkins"
+      "app": "markets-microservice-jenkins"
     },
     "annotations": {
       "deployment.kubernetes.io/revision": "1",
@@ -16,30 +16,30 @@
     "replicas": 1,
     "selector": {
       "matchLabels": {
-        "app": "wlp-markets-jenkins"
+        "app": "markets-microservice-jenkins"
       }
     },
     "template": {
       "metadata": {
         "labels": {
-          "app": "wlp-markets-jenkins"
+          "app": "markets-microservice-jenkins"
         }
       },
       "spec": {
         "containers": [
           {
-            "name": "wlp-markets-jenkins",
-            "image": "mycluster.icp:8500/default/wlp-markets",
+            "name": "markets-microservice-jenkins",
+            "image": "mycluster.icp:8500/default/markets-microservice",
              "ports": [
               {
                 "containerPort": 80,
                 "protocol": "TCP"
               }
-            ],
+            ],/
          "env": [
               {
-                "name": "REST_CONTEXT_ROOT_URL",
-                "value": "http://10.0.2.15:9080/markets"
+                "name": "MARKETS_CONTEXT_ROOT_URL",
+                "value": "http://10.0.2.15:9080/markets-microservice/markets"
               }
             ],
             "resources": {},
