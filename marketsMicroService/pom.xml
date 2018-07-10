@@ -298,7 +298,7 @@
         		
         		  <properties>
         		     	<wlpServerName>Rest3Sample</wlpServerName>
-						<MarketsAppRoute>http://10.0.2.15:9080/markets-microservice</MarketsAppRoute>
+						<MarketsAppRoute>http://10.0.2.15:9086/markets</MarketsAppRoute>
 					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 			
@@ -472,7 +472,7 @@
             <name>dhvines/${project.artifactId}:${project.version}</name>
             <alias>${project.artifactId}</alias>
             <run>
-              <ports> <port>9080:9080</port> </ports>                         
+              <ports> <port>9086:9086</port> </ports>                         
               <wait>
                 <log>
                   (?s)The server defaultServer is ready to run a smarter planet.
