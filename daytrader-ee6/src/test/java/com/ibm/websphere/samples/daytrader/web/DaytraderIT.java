@@ -23,6 +23,9 @@ public class DaytraderIT {
         assertTrue("Incorrect response code: " + responseCode,responseCode == 200);
          
         String responseString = response.readEntity(String.class);
+     
+        System.out.println("in sendRequest: response = " + responseString);
+     
         response.close();
         assertTrue("Incorrect response, response is " + responseString,
                     responseString.contains(expectedOutput));
@@ -35,7 +38,8 @@ public class DaytraderIT {
         
         WebTarget target = client.target(url);
         Invocation.Builder invoBuild = target.request();
-        Response response = invoBuild.build(requestType).invoke();
+        Response response = invoBuild.build(requestType).invoke();             
+     
         return response;
     }
 }
