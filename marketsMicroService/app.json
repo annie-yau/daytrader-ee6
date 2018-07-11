@@ -35,7 +35,7 @@
                 "containerPort": 80,
                 "protocol": "TCP"
               }
-            ],/
+            ],
          "env": [
               {
                 "name": "MARKETS_CONTEXT_ROOT_URL",
