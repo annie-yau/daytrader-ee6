@@ -298,7 +298,7 @@
         		
         		  <properties>
         		     	<wlpServerName>Rest3Sample</wlpServerName>
-						<restAppRoute>http://10.0.2.15:9090</restAppRoute>
+						<marketsAppRoute>http://10.0.2.15:9086</marketsAppRoute>
 					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 			
@@ -423,7 +423,7 @@
       <goals> <goal>integration-test</goal> </goals>
       <configuration>
         <systemPropertyVariables>					
-          <rest.app.route>${restAppRoute}</rest.app.route>
+          <markets.app.route>${marketsAppRoute}</markets.app.route>
         </systemPropertyVariables>
         <testSourceDirectory>src/test/java</testSourceDirectory>
       </configuration>
@@ -472,7 +472,7 @@
             <name>dhvines/${project.artifactId}:${project.version}</name>
             <alias>${project.artifactId}</alias>
             <run>
-              <ports> <port>9090:9090</port> </ports>                         
+              <ports> <port>9086:9086</port> </ports>                         
               <wait>
                 <log>
                   (?s)The server defaultServer is ready to run a smarter planet.
