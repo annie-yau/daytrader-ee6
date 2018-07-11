@@ -31,7 +31,7 @@ pipeline {
                     echo "docker tag"
                     docker tag dhvines/markets-microservice:1.0-SNAPSHOT $ICP_MASTER_CFC/default/markets
                     echo "docker push"
-                    docker push $ICP_MASTER_CFC/default/market
+                    docker push $ICP_MASTER_CFC/default/markets
                     echo "kubectl login"                    
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
