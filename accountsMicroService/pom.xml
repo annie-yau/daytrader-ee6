@@ -305,7 +305,7 @@
         		
         		  <properties>
         		     	<wlpServerName>Rest3Sample</wlpServerName>
-						<restAppRoute>http://10.0.2.15:9085</restAppRoute>
+						<accountsAppRoute>http://10.0.2.15:9085</accountsAppRoute>
 						
 					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
