@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>accountsMicroService</name>
+    <name>accounts-microservice</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -304,7 +304,7 @@
         		
         		  <properties>
         		     	<wlpServerName>Rest3Sample</wlpServerName>
-						<restAppRoute>http://10.0.2.15:9090</restAppRoute>
+						<restAppRoute>http://10.0.2.15:9085</restAppRoute>
 						
 					    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -430,7 +430,7 @@
       <goals> <goal>integration-test</goal> </goals>
       <configuration>
         <systemPropertyVariables>					
-          <rest.app.route>${restAppRoute}</rest.app.route>
+          <accounts.app.route>${accountsAppRoute}</accounts.app.route>
         </systemPropertyVariables>
         <testSourceDirectory>src/test/java</testSourceDirectory>
       </configuration>
@@ -479,7 +479,7 @@
             <name>dhvines/${project.artifactId}:${project.version}</name>
             <alias>${project.artifactId}</alias>
             <run>
-              <ports> <port>9090:9090</port> </ports>                         
+              <ports> <port>9085:9085</port> </ports>                         
               <wait>
                 <log>
                   (?s)Web application available.
@@ -505,5 +505,5 @@
 			</profile>
 </profiles>
 
-  	<artifactId>accountsMicroService</artifactId>
+  	<artifactId>accounts-microservice</artifactId>
 </project>
