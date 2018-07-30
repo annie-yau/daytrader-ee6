@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'ICP_MASTER_CFC', defaultValue: 'mycluster.icp:8500')
+        string(name: 'ICP_MASTER_8001', defaultValue: 'https://10.0.2.15:8001')
+        string(name: 'ICP_TOKEN', defaultValue: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tdGJyeGgiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImUwMDA4ZWM1LTVmZmUtMTFlOC04NjA2LTA4MDAyN2Y3NDNiNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.YSQCw7KPCLKLd5j4fUzCP0esw0NVlv0ff1uDCB7XtnVuqOzRdZ0yZvW5uigwNgS9nnXtOnalxtjxcbPEYtiluP4kEjXxIMKSpwaolJ3rCXgPtCsQrwXOfY1uiVqNF0hOU75UdaSFnqGMCvW0Za57tO-aNt7D8PF0tD6-7rNf3Rq7xr_12koA_FLsmBxLuz4IG7DSSaIBhbU4I_fijmClSpGgeOypqE18bDQUAU7nsxPQFMR6_3IwnBizUNwzlMWZTom27MgVEAyuHxabOP0qC0wTHkVmKvXJ9CP_mt998lQ_x5ukTYxeEisR9cvh3eX53SIjvW3MXMzcS4RbCg_EOg')
+    }
+    stages {
+        stage('Continuous Integration') {
+            steps {
+                sh '''
+                    export M2_HOME=/usr/local/src/apache-maven
+                    export PATH=$PATH:$M2_HOME/bin
+                    export JAVA_HOME=/opt/jdk1.8.0_171
+                    export markets_app_route=http://10.0.2.15:9086
+                    cd dt-ejb-client
+                    mvn clean install
+                    cd ../rest-client
+                    mvn clean install
+                    cd ../accountsMicroService
+                    mvn clean verify -Pci-docker
+                    '''
+             }             
+        }
+        stage('Continuous Delivery') {
+            steps {
+                sh '''     
+                    export PATH=$PATH:/usr/local/bin                   
+                    echo "docker login to master.cfc"
+                    docker login -u admin -p admin $ICP_MASTER_CFC
+                    echo "docker tag"
+                    docker tag dhvines/accounts-microservice:1.0-SNAPSHOT $ICP_MASTER_CFC/default/accounts
+                    echo "docker push"
+                    docker push $ICP_MASTER_CFC/default/accounts
+                    echo "kubectl login"                    
+                    kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
+                    kubectl config set-context cfc --cluster=cfc
+                    kubectl config set-credentials user --token=$ICP_TOKEN
+                    kubectl config set-context cfc --user=user --namespace=default
+                    kubectl config use-context cfc
+                    #!/bin/bash
+                    echo "checking if accounts-microservice-jenkins already exists"
+                    if kubectl describe service accounts-microservice-jenkins; then
+                        echo "Service already exists, delete first"
+                        kubectl delete service accounts-microservice-jenkins
+                    fi
+                    if kubectl describe deployment accounts-microservice-jenkins; then
+                        echo "Application already exists, delete first"
+                        kubectl delete deployment accounts-microservice-jenkins
+                    fi
+                    echo "Create application"
+                    kubectl create -f ./accountsMicroService/app.json
+                    echo "Create service"
+                    set +e
+                    kubectl create -f ./accountsMicroService/service.json                                      
+                    echo "finished"
+                '''
+            }
+        }
+    }
+}
