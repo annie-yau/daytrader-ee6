@@ -1,0 +1,28 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "accounts-microservice-jenkins",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/accounts-microservice-jenkins",
+    "labels": {
+      "app": "accounts-microservice-jenkins"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 9085,
+        "nodePort": 31423
+      }
+    ],
+    "selector": {
+      "app": "accounts-microservice-jenkins"
+    },
+    "type": "NodePort",
+    "sessionAffinity": "None"
+  }
+}
