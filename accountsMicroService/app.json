@@ -1,0 +1,71 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Deployment",
+  "metadata": {
+    "name": "accounts-microservice-jenkins",
+    "namespace": "default",
+    "labels": {
+      "app": "accounts-microservice-jenkins"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "1",
+      "kubernetes.io/change-cause": "Initial application creation."
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "accounts-microservice-jenkins"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "accounts-microservice-jenkins"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "accounts-microservice-jenkins",
+            "image": "mycluster.icp:8500/default/accounts",
+             "ports": [
+              {
+                "containerPort": 80,
+                "protocol": "TCP"
+              }
+            ],
+         "env": [
+              {
+                "name": "MARKETS_CONTEXT_ROOT_URL",
+                "value": "http://10.0.2.15:9085/accounts"
+              }
+            ],
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "imagePullSecrets": [
+          {
+            "name": "admin.registrykey"
+          }
+          ],
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
+    }
+  }
+}
