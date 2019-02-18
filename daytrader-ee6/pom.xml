@@ -174,7 +174,7 @@
       <id>ci-docker</id>        
       <properties>
     	<wlpServerName>Daytrader3Sample</wlpServerName>
-    	<daytraderAppRoute>http://10.0.2.15:9080</daytraderAppRoute>
+    	<daytraderAppRoute>http://127.0.0.1:9080</daytraderAppRoute>
 	  </properties>
     <dependencies>
   		<!--  test dependencies -->
