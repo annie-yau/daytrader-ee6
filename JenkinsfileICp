@@ -2,6 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'ICP_MASTER_CFC', defaultValue: 'mycluster.icp:8500')
+        string(name: 'ICP_MASTER_USER', defaultValue: 'technet')
+        string(name: 'ICP_MASTER_PW', defaultValue: '1234qweR')
         string(name: 'ICP_MASTER_8001', defaultValue: 'http://169.56.149.170:8001')
         string(name: 'ICP_TOKEN', defaultValue: 'ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklpSjkuZXlKcGMzTWlPaUpyZFdKbGNtNWxkR1Z6TDNObGNuWnBZMlZoWTJOdmRXNTBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5dVlXMWxjM0JoWTJVaU9pSmpaWEowTFcxaGJtRm5aWElpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxZM0psZEM1dVlXMWxJam9pWkdWbVlYVnNkQzEwYjJ0bGJpMHlOamcyZWlJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZ5ZG1salpTMWhZMk52ZFc1MExtNWhiV1VpT2lKa1pXWmhkV3gwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXpaWEoyYVdObExXRmpZMjkxYm5RdWRXbGtJam9pTURRNE5UZzFZVFV0TVRRNU5DMHhNV1U1TFRsaFltRXRNREF3WXpJNU56QTRZalpqSWl3aWMzVmlJam9pYzNsemRHVnRPbk5sY25acFkyVmhZMk52ZFc1ME9tTmxjblF0YldGdVlXZGxjanBrWldaaGRXeDBJbjAub1RRUUpDOXFybGh0SEQySFZ3MHl3eGFTODhURlc2VlM0enJMcWRmT0luUHlvNGkwcnJ6aW9vcVdlenJGUV9wd1RYTG5QOG9rN2FOMmt6RVMtZzNmcDNUaWU3MzdBeDhucUV6V1NLSHNmWEd1T3M0eXNFSlRZNW1QSlVmejZzZldVYjNEcE5PcUlvVDlEWHlFNDZEd1doMHduLTU2Um1DZEtNeENMd29QY0poZjk4Ny1OdlNxQkd1X1JrWVBXMTNkNExjTWFPOUxLRldTT3g2TGo0dDV2bk5WeHdnWkJRUE9xV2YzVXcwRVlLUlM0Z0hheEppRENvRk04ckVJVGxpTkM3QVRvV0tuRHJtN3BOQjlqTHdvcXFMb2poOThJSllGV0g1cWktSjN6aDB2N2VzS1VydlBlMXFmajBJd2tucDk1Tk1NZXJ1UTF4akNhVjdpRHZ3Umpn')
     }
@@ -26,11 +28,11 @@ pipeline {
                 sh '''     
                     export PATH=$PATH:/usr/local/bin
                     echo "docker login to master.cfc"
-                    docker login -u admin -p admin $ICP_MASTER_CFC
+                    docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
                     echo "docker tag"
-                    docker tag dhvines/daytrader-ee6:1.0-SNAPSHOT $ICP_MASTER_CFC/default/daytrader-ee6
+                    docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/workshop/daytrader-ee6
                     echo "docker push"
-                    docker push $ICP_MASTER_CFC/default/daytrader-ee6
+                    docker push $ICP_MASTER_CFC/workshop/daytrader-ee6
                     echo "kubectl login"                    
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
