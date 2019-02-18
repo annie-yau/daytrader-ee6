@@ -4,7 +4,7 @@
 
   <groupId>com.ibm.websphere.samples.daytrader</groupId>
   <artifactId>daytrader-ee6</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0-snapshot</version>
   <packaging>ear</packaging>
 
   <name>daytrader-ee6</name>
