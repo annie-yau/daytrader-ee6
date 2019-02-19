@@ -37,7 +37,7 @@ pipeline {
                     kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context cfc --cluster=cfc
                     kubectl config set-credentials user --token=$ICP_TOKEN
-                    kubectl config set-context cfc --user=user --namespace=default
+                    kubectl config set-context cfc --user=technet --namespace=workshop
                     kubectl config use-context cfc
                     #!/bin/bash
                     echo "checking if wlp-daytrader-jenkins already exists"
