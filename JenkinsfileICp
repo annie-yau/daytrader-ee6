@@ -7,6 +7,16 @@ pipeline {
         string(name: 'ICP_MASTER_8001', defaultValue: 'https://161.202.60.33:8001')
         string(name: 'ICP_TOKEN', defaultValue: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiOTJkMWQzYWY1MjA3N2FiNjE4ODFkOTM3YThjMWEyMzYwMTZmMGQ1MyIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoidGVjaG5ldCIsImlzcyI6Imh0dHBzOi8vbXljbHVzdGVyLmljcDo5NDQzL29pZGMvZW5kcG9pbnQvT1AiLCJhdWQiOiIwNzY0ZmNmZmU1MTQyNjU4N2JmNGI5NDAyOTE4M2VlYSIsImV4cCI6MTU1MDU2NzM5NCwiaWF0IjoxNTUwNTM4NTk0LCJzdWIiOiJ0ZWNobmV0IiwidGVhbVJvbGVNYXBwaW5ncyI6WyJzeXN0ZW06bWFzdGVycyJdfQ.UrCFA-43d7MXrHDofDApNiubnERzPN0iEFTedv48oi-YF0VpaxHHcw6Gfk31BcwEhtfIPoGQQGX_N1ibdWq3nawfLGC7_aaIIyfl19kThooC6Ctp_JyEhqGaSPHTBP8bCzPE8Gws79AVhMDuwtb-D_QEqAOFyfF5v5rPKIdOxqK_NgXEOlq7d79peXIjM9PKp8r-d9FHeNGPz7mRydgCJrjSA6bULpkg-DsRoa1DnOiQElZDotrLnJmzdipjaWDcpnE1tmy15rNTqnm7G_-WZo_nDSqTM_xk3N6CPqqkkWjCqR3YE7tGvsXgZcjpuA8F4Hsw2FEgPtBQzaljSjES1w')
     }
+    
+    triggers {
+        genericTrigger {
+            token('daytrader')
+            printContributedVariables(false)
+            printPostContent(false)
+            silentResponse(false)
+        }
+     }
+     
     stages {
         stage('Continuous Integration') {
             steps {
