@@ -40,15 +40,10 @@ pipeline {
                     kubectl config set-context mycluster-context --user=$ICP_MASTER_USER --namespace=cert-manager
                     kubectl config use-context mycluster-context
                     #!/bin/bash
-                    echo "checking if wlp-daytrader-jenkins already exists"
-                    if kubectl describe service wlp-daytrader-jenkins; then
-                        echo "Service already exists, delete first"
-                        kubectl delete service wlp-daytrader-jenkins
-                    fi
-                    if kubectl describe deployment wlp-daytrader-jenkins; then
-                        echo "Application already exists, delete first"
-                        kubectl delete deployment wlp-daytrader-jenkins
-                    fi
+                    echo "Delete previous service"
+                    kubectl delete service wlp-daytrader-jenkins
+                    echo "Delete previous deployment"
+                    kubectl delete deployment wlp-daytrader-jenkins
                     echo "Create application"
                     kubectl create -f app.json
                     echo "Create service"
