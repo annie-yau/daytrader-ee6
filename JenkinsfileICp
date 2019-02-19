@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh '''     
                     export PATH=$PATH:/usr/local/bin
-                    echo "docker login to master.cfc"
+                    echo "docker login to mycluster.icp"
                     docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
                     echo "docker tag"
                     docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/workshop/daytrader-ee6
