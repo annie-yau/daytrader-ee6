@@ -3,7 +3,7 @@
   "kind": "Deployment",
   "metadata": {
     "name": "wlp-daytrader-jenkins",
-    "namespace": "default",
+    "namespace": "workshop",
     "labels": {
       "app": "wlp-daytrader-jenkins"
     },
@@ -29,7 +29,7 @@
         "containers": [
           {
             "name": "wlp-daytrader-jenkins",
-            "image": "mycluster.icp:8500/default/daytrader-ee6",
+            "image": "mycluster.icp:8500/workshop/daytrader-ee6",
              "ports": [
               {
                 "containerPort": 80,
