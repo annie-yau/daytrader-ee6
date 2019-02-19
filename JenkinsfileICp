@@ -34,11 +34,11 @@ pipeline {
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/workshop/daytrader-ee6
                     echo "kubectl login"                    
-                    kubectl config set-cluster cfc --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
-                    kubectl config set-context cfc --cluster=cfc
-                    kubectl config set-credentials user --token=$ICP_TOKEN
-                    kubectl config set-context cfc --user=technet --namespace=workshop
-                    kubectl config use-context cfc
+                    kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
+                    kubectl config set-context mycluster-context --cluster=mycluster
+                    kubectl config set-credentials $ICP_MASTER_USER --token=$ICP_TOKEN
+                    kubectl config set-context mycluster-context --user=$ICP_MASTER_USER --namespace=cert-manager
+                    kubectl config use-context mycluster-context
                     #!/bin/bash
                     echo "checking if wlp-daytrader-jenkins already exists"
                     if kubectl describe service wlp-daytrader-jenkins; then
