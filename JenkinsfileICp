@@ -9,12 +9,12 @@ pipeline {
     }
     
     triggers {
-        genericTrigger {
-            token('daytrader')
-            printContributedVariables(false)
-            printPostContent(false)
-            silentResponse(false)
-        }
+        GenericTrigger (
+            token:'daytrader',
+            printContributedVariables: false,
+            printPostContent: false,
+            silentRespons: false
+        )
      }
      
     stages {
