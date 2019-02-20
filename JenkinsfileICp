@@ -34,8 +34,7 @@ pipeline {
         }
         stage('Continuous Delivery') {
             steps {
-                sh '''     
-                    export PATH=$PATH:/usr/local/bin
+                sh '''                         
                     echo "docker login to mycluster.icp"
                     docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
                     echo "docker tag"
