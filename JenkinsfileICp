@@ -5,8 +5,7 @@ pipeline {
         string(name: 'ICP_MASTER_USER', defaultValue: 'technet')
         string(name: 'ICP_MASTER_PW', defaultValue: '1234qweR')
         string(name: 'ICP_MASTER_8001', defaultValue: 'https://161.202.60.33:8001')
-        string(name: 'ICP_TOKEN', defaultValue: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdF9oYXNoIjoiOTJkMWQzYWY1MjA3N2FiNjE4ODFkOTM3YThjMWEyMzYwMTZmMGQ1MyIsInJlYWxtTmFtZSI6ImN1c3RvbVJlYWxtIiwidW5pcXVlU2VjdXJpdHlOYW1lIjoidGVjaG5ldCIsImlzcyI6Imh0dHBzOi8vbXljbHVzdGVyLmljcDo5NDQzL29pZGMvZW5kcG9pbnQvT1AiLCJhdWQiOiIwNzY0ZmNmZmU1MTQyNjU4N2JmNGI5NDAyOTE4M2VlYSIsImV4cCI6MTU1MDU2NzM5NCwiaWF0IjoxNTUwNTM4NTk0LCJzdWIiOiJ0ZWNobmV0IiwidGVhbVJvbGVNYXBwaW5ncyI6WyJzeXN0ZW06bWFzdGVycyJdfQ.UrCFA-43d7MXrHDofDApNiubnERzPN0iEFTedv48oi-YF0VpaxHHcw6Gfk31BcwEhtfIPoGQQGX_N1ibdWq3nawfLGC7_aaIIyfl19kThooC6Ctp_JyEhqGaSPHTBP8bCzPE8Gws79AVhMDuwtb-D_QEqAOFyfF5v5rPKIdOxqK_NgXEOlq7d79peXIjM9PKp8r-d9FHeNGPz7mRydgCJrjSA6bULpkg-DsRoa1DnOiQElZDotrLnJmzdipjaWDcpnE1tmy15rNTqnm7G_-WZo_nDSqTM_xk3N6CPqqkkWjCqR3YE7tGvsXgZcjpuA8F4Hsw2FEgPtBQzaljSjES1w')
-    }
+}
     
     triggers {
         GenericTrigger (
@@ -43,10 +42,11 @@ pipeline {
                     docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/workshop/daytrader-ee6
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/workshop/daytrader-ee6
-                    echo "kubectl login"                    
+                    echo "kubectl login"   
+                    idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=technet&password=1234qweR&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
                     kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context mycluster-context --cluster=mycluster
-                    kubectl config set-credentials $ICP_MASTER_USER --token=$ICP_TOKEN
+                    kubectl config set-credentials $ICP_MASTER_USER --token=$idToken
                     kubectl config set-context mycluster-context --user=$ICP_MASTER_USER --namespace=workshop
                     kubectl config use-context mycluster-context
                     #!/bin/bash
