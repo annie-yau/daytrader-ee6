@@ -13,7 +13,7 @@ pipeline {
             token:'daytrader',
             printContributedVariables: false,
             printPostContent: false,
-            silentRespons: false
+            silentResponse: false
         )
      }
      
