@@ -6,7 +6,7 @@
     "namespace": "demo-env-dev",
     "selfLink": "/api/v1/namespaces/demo-env-dev/services/wlp-daytrader-jenkins",
     "labels": {
-      "app": "wlp-daytrader-jenkins"
+      "app": "wlp-daytrader-jenkins-dev"
     }
   },
   "spec": {
@@ -19,7 +19,7 @@
       }
     ],
     "selector": {
-      "app": "wlp-daytrader-jenkins"
+      "app": "wlp-daytrader-jenkins-dev"
     },
     "type": "NodePort",
     "sessionAffinity": "None"
