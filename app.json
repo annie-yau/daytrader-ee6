@@ -29,7 +29,7 @@
         "containers": [
           {
             "name": "wlp-daytrader-jenkins",
-            "image": "mycluster.icp:8500/demo-env-dev/daytrader-ee6",
+            "image": "mycluster.icp:8500/demo-env-dev/daytrader-ee6:latest",
              "ports": [
               {
                 "containerPort": 9080,
