@@ -37,6 +37,11 @@ pipeline {
                 sh '''                         
                     echo "docker login to mycluster.icp"
                     docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
+                    echo "remove existing docker image in ICP"
+                    if docker inspect --type=image $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6; then
+                        echo "image already exists, delete first"
+                        docker rmi $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
+                    fi      
                     echo "docker tag"
                     docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
                     echo "docker push"
