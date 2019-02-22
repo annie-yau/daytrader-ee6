@@ -37,7 +37,7 @@ pipeline {
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
                     echo "kubectl login"   
-                    ICP_MASTER_CFC=mycluster.icp:8500'
+                    ICP_MASTER_CFC=mycluster.icp:8500
                     ICP_MASTER_USER=technet
                     ICP_MASTER_PW=1234qweR
                     ICP_MASTER_8001=https://161.202.60.33:8001
