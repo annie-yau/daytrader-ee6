@@ -6,15 +6,10 @@ pipeline {
         string(name: 'ICP_MASTER_PW', defaultValue: '1234qweR')
         string(name: 'ICP_MASTER_8001', defaultValue: 'https://161.202.60.33:8001')
 }
-    
     triggers {
-        GenericTrigger (
-            token:'daytrader-demo-dev',
-            printContributedVariables: false,
-            printPostContent: false,
-            silentResponse: false
-        )
-     }
+        githubPush()
+        pollSCM('')
+    }
      
     stages {
         stage('Continuous Integration') {
