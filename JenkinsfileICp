@@ -24,7 +24,11 @@ pipeline {
         }
         stage('Continuous Delivery') {
             steps {
-                sh '''                         
+                sh '''   
+                    ICP_MASTER_CFC="mycluster.icp:8500"
+                    ICP_MASTER_USER="technet"
+                    ICP_MASTER_PW="1234qweR"
+                    ICP_MASTER_8001="https://161.202.60.33:8001"
                     echo "docker login to mycluster.icp"
                     docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
                     echo "remove existing docker image in ICP"
@@ -36,11 +40,7 @@ pipeline {
                     docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
                     echo "docker push"
                     docker push $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
-                    echo "kubectl login"   
-                    ICP_MASTER_CFC="mycluster.icp:8500"
-                    ICP_MASTER_USER="technet"
-                    ICP_MASTER_PW="1234qweR"
-                    ICP_MASTER_8001="https://161.202.60.33:8001"
+                    echo "kubectl login"                       
                     idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=technet&password=1234qweR&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
                     kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                     kubectl config set-context demo-dev-env-context --cluster=mycluster
