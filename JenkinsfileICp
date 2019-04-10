@@ -4,7 +4,12 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
-
+    
+    environment {
+        DOCKER_HOME = tool('myDocker')
+        PATH = "${DOCKER_HOME}/bin:$PATH"
+    }
+    
     triggers {
         githubPush()
         pollSCM('')
@@ -12,10 +17,7 @@ pipeline {
      
     stages {
         stage('Continuous Integration') {
-            steps {
-                   def dockerHome = tool 'myDocker'
-                   env.PATH = "${dockerHome}/bin:${env.PATH}"
-                   
+            steps {                 
                 sh '''
                    cd dt-ejb
                    mvn clean install
