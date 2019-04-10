@@ -13,9 +13,10 @@ pipeline {
     stages {
         stage('Continuous Integration') {
             steps {
-                sh '''
                    def dockerHome = tool 'myDocker'
                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                   
+                sh '''
                    cd dt-ejb
                    mvn clean install
                    cd ../Rest
