@@ -4,12 +4,7 @@ pipeline {
     tools {
     maven 'apache-maven-3.5.4'
     }
-    
-    environment {
-        DOCKER_HOME = tool('myDocker')
-        PATH = "${DOCKER_HOME}/bin:$PATH"
-    }
-    
+       
     triggers {
         githubPush()
         pollSCM('')
