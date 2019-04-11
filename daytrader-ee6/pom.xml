@@ -314,7 +314,7 @@
 			            <name>dhvines/${project.artifactId}:${project.version}</name>
 			            <alias>${project.artifactId}</alias>
 			            <run>
-			              <ports> <port>19080:9080</port> <port>19443:9443</port> </ports>                         
+			              <ports> <port>9081:9080</port> <port>9444:9443</port> </ports>                         
 			              <wait>
 			                <log>
 			                  (?s)The server defaultServer is ready to run a smarter planet.
