@@ -60,7 +60,7 @@ pipeline {
                             echo "Application already exists, delete first"
                             kubectl delete deployment wlp-daytrader-jenkins -n demo-env-dev
                         fi
-                        echo "Create application"
+                        echo "Create application in ICP"
                         kubectl create -f app.json
                         echo "Create service"
                         set +e
