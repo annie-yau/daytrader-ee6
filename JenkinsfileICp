@@ -28,10 +28,9 @@ pipeline {
         }
         stage('Continuous Delivery') {
             steps {
-                withCredentials([string(credentialsId: 'ICP_MASTER_PW', variable: 'ICP_MASTER_PW')]) {
+                withCredentials([usernamePassword(credentialsId: 'ICP_ACCOUNT', usernameVariable: 'ICP_MASTER_USER', passwordVariable: 'ICP_MASTER_PW')]) {
                     sh '''   
-                        ICP_MASTER_CFC="mycluster.icp:8500"
-                        ICP_MASTER_USER="technet"                       
+                        ICP_MASTER_CFC="mycluster.icp:8500"                
                         ICP_MASTER_8001="https://161.202.60.33:8001"
                         echo "docker login to mycluster.icp"
                         docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
