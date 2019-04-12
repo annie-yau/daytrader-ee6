@@ -44,7 +44,7 @@ pipeline {
                         echo "docker push"
                         docker push $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
                         echo "kubectl login"                       
-                        idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=technet&password=1234qweR&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
+                        idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=$ICP_MASTER_USER&password=$ICP_MASTER_PW&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
                         kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
                         kubectl config set-context demo-dev-env-context --cluster=mycluster
                         kubectl config set-credentials $ICP_MASTER_USER --token=$idToken
