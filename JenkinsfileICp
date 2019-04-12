@@ -28,46 +28,47 @@ pipeline {
         }
         stage('Continuous Delivery') {
             steps {
-                sh '''   
-                    ICP_MASTER_CFC="mycluster.icp:8500"
-                    ICP_MASTER_USER="technet"
-                    ICP_MASTER_PW="1234qweR"
-                    ICP_MASTER_8001="https://161.202.60.33:8001"
-                    echo "docker login to mycluster.icp"
-                    docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
-                    echo "remove existing docker image in ICP"
-                    if docker inspect --type=image $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6; then
-                        echo "image already exists, delete first"
-                        docker rmi $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
-                    fi      
-                    echo "docker tag"
-                    docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
-                    echo "docker push"
-                    docker push $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
-                    echo "kubectl login"                       
-                    idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=technet&password=1234qweR&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
-                    kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
-                    kubectl config set-context demo-dev-env-context --cluster=mycluster
-                    kubectl config set-credentials $ICP_MASTER_USER --token=$idToken
-                    kubectl config set-context demo-dev-env-context --user=$ICP_MASTER_USER --namespace=demo-env-dev
-                    kubectl config use-context demo-dev-env-context
-                    #!/bin/bash
-                    echo "checking if wlp-daytrader-jenkins already exists"
-                    if kubectl describe service wlp-daytrader-jenkins -n demo-env-dev; then
-                        echo "Service already exists, delete first"
-                        kubectl delete service wlp-daytrader-jenkins -n demo-env-dev
-                    fi
-                    if kubectl describe deployment wlp-daytrader-jenkins -n demo-env-dev; then
-                        echo "Application already exists, delete first"
-                        kubectl delete deployment wlp-daytrader-jenkins -n demo-env-dev
-                    fi
-                    echo "Create application"
-                    kubectl create -f app.json
-                    echo "Create service"
-                    set +e
-                    kubectl create -f service.json                                      
-                    echo "finished"
-                '''
+                withCredentials([string(credentialsId: 'ICP_MASTER_PW', variable: 'ICP_MASTER_PW')]) {
+                    sh '''   
+                        ICP_MASTER_CFC="mycluster.icp:8500"
+                        ICP_MASTER_USER="technet"                       
+                        ICP_MASTER_8001="https://161.202.60.33:8001"
+                        echo "docker login to mycluster.icp"
+                        docker login -u $ICP_MASTER_USER -p $ICP_MASTER_PW $ICP_MASTER_CFC
+                        echo "remove existing docker image in ICP"
+                        if docker inspect --type=image $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6; then
+                            echo "image already exists, delete first"
+                            docker rmi $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
+                        fi      
+                        echo "docker tag"
+                        docker tag dhvines/daytrader-ee6:1.0-snapshot $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
+                        echo "docker push"
+                        docker push $ICP_MASTER_CFC/demo-env-dev/daytrader-ee6:latest
+                        echo "kubectl login"                       
+                        idToken=$(curl -k -H "Content-Type: application/x-www-form-urlencoded;charset=UTF-8" -d "grant_type=password&username=technet&password=1234qweR&scope=openid" https://mycluster.icp:8443/idprovider/v1/auth/identitytoken --insecure|/icpAuth/jq -r '.id_token')
+                        kubectl config set-cluster mycluster --server=$ICP_MASTER_8001 --insecure-skip-tls-verify=true
+                        kubectl config set-context demo-dev-env-context --cluster=mycluster
+                        kubectl config set-credentials $ICP_MASTER_USER --token=$idToken
+                        kubectl config set-context demo-dev-env-context --user=$ICP_MASTER_USER --namespace=demo-env-dev
+                        kubectl config use-context demo-dev-env-context
+                        #!/bin/bash
+                        echo "checking if wlp-daytrader-jenkins already exists"
+                        if kubectl describe service wlp-daytrader-jenkins -n demo-env-dev; then
+                            echo "Service already exists, delete first"
+                            kubectl delete service wlp-daytrader-jenkins -n demo-env-dev
+                        fi
+                        if kubectl describe deployment wlp-daytrader-jenkins -n demo-env-dev; then
+                            echo "Application already exists, delete first"
+                            kubectl delete deployment wlp-daytrader-jenkins -n demo-env-dev
+                        fi
+                        echo "Create application"
+                        kubectl create -f app.json
+                        echo "Create service"
+                        set +e
+                        kubectl create -f service.json                                      
+                        echo "finished"
+                    '''
+                }
             }
         }
     }
